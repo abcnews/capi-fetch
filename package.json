@@ -1,7 +1,7 @@
 {
   "name": "@abcnews/capi-fetch",
   "version": "1.0.0",
-  "description": "Grab a Core Media document object from the Preview / Live Content API, based on current execution domain",
+  "description": "Grab a Core Media document object from the Preview / Live Content API, based on the current execution domain",
   "license": "MIT",
   "contributors": [
     "Colin Gourlay <Gourlay.Colin@abc.net.au>"
