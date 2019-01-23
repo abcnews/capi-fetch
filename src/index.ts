@@ -8,21 +8,26 @@ const IS_PREVIEW_SITE = window.location.hostname.indexOf(PREVIEW_HOSTNAME) > -1;
 const HAS_LIVE_FLAG = window.location.search.indexOf('prod') > -1;
 const CAPI_ENV_BASED_ORIGIN = !IS_PREVIEW_SITE || HAS_LIVE_FLAG ? CAPI_LIVE_ORIGIN : CAPI_PREVIEW_ORIGIN;
 
-function capiFetch(cmid, done, forceLive) {
-  if (!cmid.length && cmid != +cmid) {
+function capiFetch(
+  cmid: string | number,
+  done: (err?: ProgressEvent | Error, doc?: Object) => void,
+  forceLive?: boolean
+): void {
+  if (cmid != +cmid && !String(cmid).length) {
     return done(new Error(`Invalid CMID: ${cmid}`));
   }
 
   const xhr = new XMLHttpRequest();
+  const errorHandler = (event: ProgressEvent) => done(event);
 
-  xhr.onabort = done;
-  xhr.onerror = done;
-  xhr.onload = () => done(xhr.status === 200 ? null : new Error(xhr.status), parse(xhr.responseText));
+  xhr.onabort = errorHandler;
+  xhr.onerror = errorHandler;
+  xhr.onload = event => done(xhr.status !== 200 ? event : undefined, parse(xhr.responseText));
   xhr.open('GET', `${forceLive ? CAPI_LIVE_ORIGIN : CAPI_ENV_BASED_ORIGIN}/api/v2/content/id/${cmid}`);
-  xhr.send(null);
+  xhr.send();
 }
 
-function parse(responseText) {
+function parse(responseText: string) {
   // The Content API is not returning proxied asset URLs (yet)
   return JSON.parse(responseText.replace(GENIUNE_MEDIA_ORIGIN_PATTERN, PROXIED_MEDIA_ORIGIN));
 }

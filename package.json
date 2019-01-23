@@ -12,13 +12,14 @@
   },
   "main": "dist/capi-fetch.js",
   "module": "dist/capi-fetch.mjs",
+  "source": "src/index.ts",
   "files": [
     "dist"
   ],
   "scripts": {
     "start": "http-server example --silent & npm run watch",
-    "watch": "microbundle watch --format umd --entry example/src/index.js --output example/dist/bundle.js -c-1",
-    "build": "microbundle --format cjs,es --sourcemap false",
+    "watch": "microbundle watch --entry example/src/index.ts --output example/dist/bundle.js --format umd",
+    "build": "microbundle --format cjs,es --no-sourcemap",
     "prepare": "npm run build"
   },
   "devDependencies": {

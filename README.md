@@ -26,7 +26,11 @@ If you want to direct a single request to Live CAPI, regardless of the current e
 ### API
 
 ```ts
-function capiFetch(cmid: number, done: function, forceLive?: boolean): any { ... }
+declare function capiFetch(
+  cmid: string | number,
+  done: (err?: ProgressEvent | Error, doc?: Object) => void,
+  forceLive?: boolean
+): void;
 ```
 
 ## Developing

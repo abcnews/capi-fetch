@@ -2,6 +2,7 @@
 node_modules
 
 # builds
+.rts2_cache_*
 dist
 
 # misc
