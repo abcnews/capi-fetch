@@ -17,15 +17,12 @@
   ],
   "scripts": {
     "start": "http-server example --silent & npm run watch",
-    "watch": "microbundle watch --format umd --entry example/src/index.js --external none --output example/dist/bundle.js -c-1",
+    "watch": "microbundle watch --format umd --entry example/src/index.js --output example/dist/bundle.js -c-1",
     "build": "microbundle --format cjs,es --sourcemap false",
     "prepare": "npm run build"
   },
   "devDependencies": {
     "http-server": "^0.11.1",
     "microbundle": "^0.9.0"
-  },
-  "dependencies": {
-    "xhr": "^2.5.0"
   }
 }
