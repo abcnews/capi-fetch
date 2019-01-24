@@ -22,12 +22,13 @@ function capiFetch(
 
   xhr.onabort = errorHandler;
   xhr.onerror = errorHandler;
-  xhr.onload = event => done(xhr.status !== 200 ? event : undefined, parse(xhr.responseText));
+  xhr.onload = event => (xhr.status !== 200 ? done(event) : done(undefined, parse(xhr.responseText)));
   xhr.open('GET', `${forceLive ? CAPI_LIVE_ORIGIN : CAPI_ENV_BASED_ORIGIN}/api/v2/content/id/${cmid}`);
+  xhr.responseType = 'text';
   xhr.send();
 }
 
-function parse(responseText: string) {
+function parse(responseText: string): Object {
   // The Content API is not returning proxied asset URLs (yet)
   return JSON.parse(responseText.replace(GENIUNE_MEDIA_ORIGIN_PATTERN, PROXIED_MEDIA_ORIGIN));
 }
