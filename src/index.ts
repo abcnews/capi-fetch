@@ -11,7 +11,8 @@ const CAPI_ENV_BASED_ORIGIN = !IS_PREVIEW_SITE || HAS_LIVE_FLAG ? CAPI_LIVE_ORIG
 function capiFetch(
   cmid: string | number,
   done: (err?: ProgressEvent | Error, doc?: Object) => void,
-  forceLive?: boolean
+  forceLive?: boolean,
+  forcePreview?: boolean
 ): void {
   if (cmid != +cmid && !String(cmid).length) {
     return done(new Error(`Invalid CMID: ${cmid}`));
@@ -23,7 +24,12 @@ function capiFetch(
   xhr.onabort = errorHandler;
   xhr.onerror = errorHandler;
   xhr.onload = event => (xhr.status !== 200 ? done(event) : done(undefined, parse(xhr.responseText)));
-  xhr.open('GET', `${forceLive ? CAPI_LIVE_ORIGIN : CAPI_ENV_BASED_ORIGIN}/api/v2/content/id/${cmid}`);
+  xhr.open(
+    'GET',
+    `${
+      forceLive ? CAPI_LIVE_ORIGIN : forcePreview ? CAPI_PREVIEW_ORIGIN : CAPI_ENV_BASED_ORIGIN
+    }/api/v2/content/id/${cmid}`
+  );
   xhr.responseType = 'text';
   xhr.send();
 }

@@ -29,7 +29,8 @@ If you want to direct a single request to Live CAPI, regardless of the current e
 declare function capiFetch(
   cmid: string | number,
   done: (err?: ProgressEvent | Error, doc?: Object) => void,
-  forceLive?: boolean
+  forceLive?: boolean,
+  forcePreview?: boolean
 ): void;
 ```
 
