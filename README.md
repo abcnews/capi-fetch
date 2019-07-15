@@ -1,5 +1,5 @@
 > **⚠️ DEPRECATED ⚠**
-> CAPI will not be supported in the near future. Terminus now has similar capabilities and [@abcnews/capi-fetch](https://github.com/abcnews/capi-fetch) should be be used for all projects.
+> CAPI will not be supported in the near future. Terminus now has similar capabilities and [@abcnews/terminus-fetch](https://github.com/abcnews/terminus-fetch) should be be used for all projects.
 
 # @abcnews/capi-fetch
 
