@@ -1,3 +1,6 @@
+> **⚠️ DEPRECATED ⚠**
+> CAPI will not be supported in the near future. Terminus now has similar capabilities and [@abcnews/capi-fetch](https://github.com/abcnews/capi-fetch) should be be used for all projects.
+
 # @abcnews/capi-fetch
 
 Grab a Core Media document object from the Preview / Live Content API, based on the current execution domain
